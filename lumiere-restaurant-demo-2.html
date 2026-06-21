@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière — Modern Nigerian &amp; Continental Fine Dining, Benin City</title>
+<meta name="description" content="Lumière is a fine dining restaurant in Benin City blending elevated Nigerian and Continental cuisine. Reserve a table or order online.">
+
+<!-- Fonts: Fraunces (display, characterful soft-serif) · Manrope (body) · JetBrains Mono (data/utility, used in the owner dashboard) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN / Play build) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:      '#0A0908',
+          inkraise: '#14110D',
+          gold:     '#C9A961',
+          goldlite: '#E8C872',
+          golddeep: '#8C7339',
+          burgundy: '#5E1A24',
+          cream:    '#F3EDE0',
+          muted:    '#9C9486',
+          line:     'rgba(255,255,255,0.09)',
+          'gold-line': 'rgba(201,169,97,0.28)',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          body: ['Manrope', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --bg:#0A0908; --bg-raise:#14110D; --surface:rgba(255,255,255,0.045);
+    --surface-strong:rgba(255,255,255,0.07); --line:rgba(255,255,255,0.09);
+    --gold-line:rgba(201,169,97,0.28); --gold:#C9A961; --gold-lite:#E8C872;
+    --gold-deep:#8C7339; --cream:#F3EDE0; --muted:#9C9486; --burgundy:#5E1A24;
+  }
+  *{ scrollbar-color: var(--gold-deep) var(--bg); }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--cream); font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  ::selection{ background:var(--gold); color:#15120D; }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-track{ background:var(--bg); }
+  ::-webkit-scrollbar-thumb{ background:var(--gold-deep); border-radius:4px; }
+
+  .font-display{ font-family:'Fraunces','serif'; font-optical-sizing:auto; }
+  .font-mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- texture / atmosphere ---------- */
+  .grain{ position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .glow-field{ position:absolute; inset:-10%; pointer-events:none; filter:blur(60px); opacity:.55; }
+  .glow-a{ position:absolute; width:46vw; height:46vw; max-width:640px; max-height:640px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,169,97,0.35), transparent 70%); top:-10%; left:-8%;
+    animation:driftA 22s ease-in-out infinite; }
+  .glow-b{ position:absolute; width:38vw; height:38vw; max-width:520px; max-height:520px; border-radius:50%;
+    background:radial-gradient(circle, rgba(94,26,36,0.4), transparent 70%); bottom:-12%; right:-6%;
+    animation:driftB 26s ease-in-out infinite; }
+  @keyframes driftA{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(4%,6%) scale(1.12);} }
+  @keyframes driftB{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-5%,-4%) scale(1.08);} }
+
+  /* ---------- glass ---------- */
+  .glass{ background:var(--surface); border:1px solid var(--line); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); }
+  .glass-strong{ background:var(--surface-strong); border:1px solid var(--gold-line); backdrop-filter:blur(22px) saturate(140%); -webkit-backdrop-filter:blur(22px) saturate(140%); }
+  .hairline{ border:1px solid var(--line); }
+  .gold-line{ border-color:var(--gold-line) !important; }
+
+  /* ---------- type accents ---------- */
+  .eyebrow{ font-family:'JetBrains Mono',monospace; letter-spacing:.22em; text-transform:uppercase; font-size:.7rem; color:var(--gold); }
+  .text-muted{ color:var(--muted); }
+  .gold-text{ color:var(--gold); }
+  .underline-grow{ position:relative; }
+  .underline-grow::after{ content:''; position:absolute; left:0; bottom:-6px; height:1px; width:0; background:var(--gold); transition:width .45s cubic-bezier(.4,0,.2,1); }
+  .underline-grow:hover::after{ width:100%; }
+
+  /* ---------- buttons ---------- */
+  .btn-gold{ background:linear-gradient(135deg,var(--gold-lite),var(--gold) 60%,var(--gold-deep)); color:#1A1409;
+    box-shadow:0 8px 30px -8px rgba(201,169,97,.55); transition:transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s; }
+  .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 14px 36px -8px rgba(201,169,97,.7); }
+
+  @keyframes ctaPulse{
+    0%,100%{ box-shadow:0 8px 30px -8px rgba(201,169,97,.55), 0 0 0 0 rgba(201,169,97,.45); }
+    50%{ box-shadow:0 8px 30px -8px rgba(201,169,97,.55), 0 0 0 12px rgba(201,169,97,0); }
+  }
+  .cta-pulse{ animation:ctaPulse 2.8s ease-out infinite; }
+  .cta-pulse:hover{ animation:none; }
+
+  @keyframes kenburns{ 0%{ transform:scale(1.04) translate(0,0); } 100%{ transform:scale(1.16) translate(-1.5%,-1.5%); } }
+  .kenburns{ animation:kenburns 24s ease-in-out infinite alternate; }
+  .btn-ghost{ border:1px solid var(--gold-line); color:var(--cream); transition:all .35s; }
+  .btn-ghost:hover{ background:rgba(201,169,97,.08); border-color:var(--gold); }
+  .fulfill-btn{ color:var(--muted); transition:all .3s; }
+  .fulfill-btn.active{ background:var(--gold); color:#1A1409; }
+  .chip{ border:1px solid var(--line); color:var(--muted); transition:all .25s; }
+  .chip.active{ background:rgba(201,169,97,.14); border-color:var(--gold); color:var(--gold-lite); }
+  .step-dot{ width:8px; height:8px; border-radius:50%; background:var(--line); }
+  .step-dot.active{ background:var(--gold); box-shadow:0 0 8px var(--gold); }
+  .slot{ border:1px solid var(--line); color:var(--muted); transition:all .25s; }
+  .slot.active{ background:var(--gold); border-color:var(--gold); color:#1A1409; }
+  .slot:disabled{ opacity:.3; cursor:not-allowed; }
+
+  /* ---------- nav / page transition ---------- */
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:''; position:absolute; left:0; right:0; bottom:-10px; height:1px; background:var(--gold); transform:scaleX(0); transition:transform .35s; }
+  .nav-link.active::after, .nav-link:hover::after{ transform:scaleX(1); }
+  .nav-link.active{ color:var(--gold-lite); }
+
+  .page{ animation:pageIn .6s cubic-bezier(.2,.7,.2,1); }
+  @keyframes pageIn{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+
+  #sweep{ position:fixed; inset:0; z-index:200; pointer-events:none; transform:scaleX(0); transform-origin:left;
+    background:linear-gradient(90deg, transparent, var(--gold) 45%, var(--gold-lite) 50%, var(--gold) 55%, transparent); }
+  #sweep.run{ animation:sweep .7s cubic-bezier(.4,0,.2,1); }
+  @keyframes sweep{ 0%{ transform:scaleX(0); transform-origin:left; opacity:.9;} 48%{ transform:scaleX(1); transform-origin:left; opacity:.7;}
+    50%{ transform-origin:right;} 100%{ transform:scaleX(0); transform-origin:right; opacity:0;} }
+
+  /* ---------- reveal on scroll ---------- */
+  [data-reveal]{ opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  [data-reveal].in{ opacity:1; transform:translateY(0); }
+  [data-reveal="scale"]{ transform:scale(.92) translateY(0); }
+  [data-reveal="scale"].in{ transform:scale(1) translateY(0); }
+
+  /* ---------- tasting rail (signature nav) ---------- */
+  #rail{ position:fixed; right:22px; top:50%; transform:translateY(-50%); z-index:60; display:none; }
+  #rail .rail-item{ display:flex; align-items:center; gap:10px; padding:7px 0; cursor:pointer; }
+  #rail .rail-num{ font-family:'Fraunces',serif; font-size:.78rem; color:var(--muted); transition:all .3s; }
+  #rail .rail-dot{ width:4px; height:4px; border-radius:50%; background:var(--muted); transition:all .3s; }
+  #rail .rail-item.active .rail-num{ color:var(--gold-lite); font-size:1rem; }
+  #rail .rail-item.active .rail-dot{ background:var(--gold-lite); width:6px; height:6px; box-shadow:0 0 10px var(--gold); }
+  #rail .rail-line{ position:absolute; left:1.5px; top:0; bottom:0; width:1px; background:var(--line); }
+
+  /* ---------- misc card / hover ---------- */
+  .lift{ transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; }
+  .lift:hover{ transform:translateY(-6px); box-shadow:0 24px 50px -20px rgba(0,0,0,.6); }
+  .plate{ position:relative; overflow:hidden; }
+  .plate::before{ content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+    opacity:.12; mix-blend-mode:overlay; }
+  .plate-icon{ font-size:2.1rem; filter:drop-shadow(0 4px 14px rgba(0,0,0,.4)); }
+
+  .badge{ font-family:'JetBrains Mono',monospace; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
+
+  /* hide scrollbar for horizontal chip rows */
+  .no-scrollbar::-webkit-scrollbar{ display:none; }
+  .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+
+  input[type="date"], input[type="time"]{ color-scheme:dark; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  @media (min-width:1024px){ #rail{ display:block; } }
+</style>
+</head>
+<body class="font-body">
+
+<div id="sweep"></div>
+
+<!-- ============ TASTING RAIL (signature page nav, desktop) ============ -->
+<nav id="rail" aria-label="Page courses">
+  <div class="rail-line"></div>
+</nav>
+
+<!-- ============ TOP NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-[72px] flex items-center justify-between">
+    <button data-go="home" class="flex items-center gap-2 group">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 6 8.5 6 13.5C6 17.09 8.69 20 12 20C15.31 20 18 17.09 18 13.5C18 8.5 12 2 12 2Z" stroke="#C9A961" stroke-width="1.2"/><path d="M12 7.5C12 7.5 9.5 11 9.5 13.7C9.5 15.5 10.6 17 12 17" stroke="#E8C872" stroke-width="1"/></svg>
+      <span class="font-display text-xl tracking-wide group-hover:text-goldlite transition-colors">LUMIÈRE</span>
+    </button>
+
+    <div class="hidden lg:flex items-center gap-8 eyebrow text-[.68rem]">
+      <a href="#" data-go="home" class="nav-link active">Home</a>
+      <a href="#" data-go="menu" class="nav-link">Menu</a>
+      <a href="#" data-go="order" class="nav-link">Order</a>
+      <a href="#" data-go="reserve" class="nav-link">Reserve</a>
+      <a href="#" data-go="gallery" class="nav-link">Gallery</a>
+      <a href="#" data-go="about" class="nav-link">About</a>
+      <a href="#" data-go="contact" class="nav-link">Contact</a>
+    </div>
+
+    <div class="hidden lg:flex items-center gap-3">
+      <button data-go="admin" class="badge px-3 py-2 rounded-full border border-gold-line text-gold hover:bg-gold/10 transition-colors">For Owners · Dashboard</button>
+      <button data-go="reserve" class="btn-gold px-5 py-2.5 rounded-full font-display text-[.85rem] tracking-wide">Reserve a Table</button>
+    </div>
+
+    <button id="burger" class="lg:hidden w-9 h-9 flex flex-col items-center justify-center gap-[5px]" aria-label="Open menu">
+      <span class="block w-6 h-[1.5px] bg-cream"></span>
+      <span class="block w-6 h-[1.5px] bg-cream"></span>
+      <span class="block w-4 h-[1.5px] bg-cream self-end"></span>
+    </button>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-line px-5 pb-6 pt-2 space-y-1">
+    <a href="#" data-go="home" class="block py-3 font-display text-lg">Home</a>
+    <a href="#" data-go="menu" class="block py-3 font-display text-lg">Menu</a>
+    <a href="#" data-go="order" class="block py-3 font-display text-lg">Order Online</a>
+    <a href="#" data-go="reserve" class="block py-3 font-display text-lg">Reservation</a>
+    <a href="#" data-go="gallery" class="block py-3 font-display text-lg">Gallery</a>
+    <a href="#" data-go="about" class="block py-3 font-display text-lg">About</a>
+    <a href="#" data-go="contact" class="block py-3 font-display text-lg">Contact</a>
+    <a href="#" data-go="admin" class="block py-3 font-display text-lg gold-text">Owner Dashboard ↗</a>
+  </div>
+</header>
+
+<main id="app" class="pt-[72px]">
+
+<!-- ================================================================ -->
+<!-- PAGE: HOME                                                        -->
+<!-- ================================================================ -->
+<section id="page-home" class="page">
+
+  <!-- HERO -->
+  <div class="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden border-b border-line">
+    <div id="heroBgWrap" class="absolute inset-0 -inset-y-10 overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1643101570532-88c8ecc07c1f?q=80&w=2400&auto=format&fit=crop" alt="Lumière dining room, candlelit table set with wine glasses" class="kenburns w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/70 to-ink"></div>
+    </div>
+    <div class="glow-field"><div class="glow-a"></div><div class="glow-b"></div></div>
+    <div class="grain"></div>
+
+    <p class="eyebrow mb-6" data-reveal>Fine Dining · Benin City</p>
+    <h1 class="font-display leading-[1.02] text-[13vw] sm:text-[8vw] lg:text-[5.6vw] max-w-5xl" data-reveal>
+      Where Culinary Art<br><span class="gold-text italic">Meets Luxury</span>
+    </h1>
+    <p class="mt-7 max-w-xl text-muted text-base md:text-lg" data-reveal>
+      An elevated tasting menu where Nigerian heritage and continental technique
+      share the same plate — served under candlelight, three minutes from Ring Road.
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-reveal>
+      <button data-go="reserve" data-tilt data-tilt-max="6" class="btn-gold cta-pulse px-8 py-4 rounded-full font-display tracking-wide">Reserve a Table</button>
+      <button data-go="order" class="btn-ghost px-8 py-4 rounded-full font-display tracking-wide glass">Order Online</button>
+    </div>
+
+    <button id="scrollHint" class="absolute bottom-8 flex flex-col items-center gap-2 text-muted">
+      <span class="eyebrow !text-[.6rem]">Scroll</span>
+      <span class="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent animate-pulse"></span>
+    </button>
+  </div>
+
+  <!-- FEATURED DISHES -->
+  <section class="max-w-7xl mx-auto px-5 md:px-8 py-24 md:py-32">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-12" data-reveal>
+      <div>
+        <p class="eyebrow mb-3">Chef's Selection</p>
+        <h2 class="font-display text-4xl md:text-5xl">Featured Dishes</h2>
+      </div>
+      <button data-go="menu" class="underline-grow eyebrow !text-cream/80 !tracking-normal !text-sm">View full menu →</button>
+    </div>
+    <div id="featuredGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="max-w-7xl mx-auto px-5 md:px-8 py-12 md:py-20">
+    <div class="mb-12 max-w-xl" data-reveal>
+      <p class="eyebrow mb-3">The Lumière Standard</p>
+      <h2 class="font-display text-4xl md:text-5xl">Why Guests Choose Us</h2>
+    </div>
+    <div id="whyGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="relative py-24 md:py-32 border-y border-line overflow-hidden">
+    <div class="grow-field"></div>
+    <div class="max-w-3xl mx-auto px-6 text-center relative" data-reveal>
+      <p class="eyebrow mb-6">In Their Words</p>
+      <svg class="mx-auto mb-6 opacity-60" width="34" height="26" viewBox="0 0 34 26" fill="none"><path d="M14.5 0C7 2 0 8.5 0 16.5C0 21.5 3.5 25 8 25C12 25 15 21.8 15 17.8C15 14 12.3 11 8.7 11C8 11 7.3 11.1 6.7 11.3C7.5 6.8 11 3 16 1.3L14.5 0Z" fill="#C9A961"/><path d="M31.5 0C24 2 17 8.5 17 16.5C17 21.5 20.5 25 25 25C29 25 32 21.8 32 17.8C32 14 29.3 11 25.7 11C25 11 24.3 11.1 23.7 11.3C24.5 6.8 28 3 33 1.3L31.5 0Z" fill="#C9A961"/></svg>
+      <div id="testimonialBody" class="min-h-[140px] flex flex-col items-center justify-center"></div>
+      <div id="testimonialDots" class="flex items-center justify-center gap-2 mt-8"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="py-20 md:py-28">
+    <div id="statsGrid" class="max-w-6xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 divide-x divide-line"></div>
+  </section>
+
+  <!-- INSTAGRAM FEED -->
+  <section class="max-w-7xl mx-auto px-5 md:px-8 py-12 md:py-20">
+    <div class="text-center mb-10" data-reveal>
+      <p class="eyebrow mb-3">@lumiere.benincity</p>
+      <h2 class="font-display text-4xl md:text-5xl">Follow the Table</h2>
+    </div>
+    <div id="instaGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"></div>
+  </section>
+
+</section>
+<!-- /PAGE: HOME -->
+
+<!-- ================================================================ -->
+<!-- PAGE: MENU                                                        -->
+<!-- ================================================================ -->
+<section id="page-menu" class="page hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-16 pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+      <p class="eyebrow mb-3">À La Carte</p>
+      <h1 class="font-display text-5xl md:text-6xl">The Menu</h1>
+      <p class="text-muted mt-4">Six courses, two cuisines, one kitchen. Search, filter, and build your order.</p>
+    </div>
+
+    <div class="sticky top-[72px] z-20 -mx-5 md:mx-0 px-5 md:px-0 py-4 mb-8 bg-ink/90 backdrop-blur-md border-b border-line">
+      <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+        <div class="relative max-w-sm w-full">
+          <input id="menuSearch" type="text" placeholder="Search dishes…" class="w-full bg-transparent hairline rounded-full pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted text-sm">⌕</span>
+        </div>
+        <div id="menuFilters" class="flex gap-2 overflow-x-auto no-scrollbar"></div>
+      </div>
+    </div>
+
+    <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <p id="menuEmpty" class="hidden text-center text-muted py-16">No dishes match your search — try a different term or category.</p>
+  </div>
+</section>
+<!-- /PAGE: MENU -->
+
+<!-- ================================================================ -->
+<!-- PAGE: ORDER ONLINE                                                -->
+<!-- ================================================================ -->
+<section id="page-order" class="page hidden">
+  <div class="max-w-5xl mx-auto px-5 md:px-8 pt-16 pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+      <p class="eyebrow mb-3">Order Online</p>
+      <h1 class="font-display text-5xl md:text-6xl">Your Order</h1>
+      <p class="text-muted mt-4">Delivered hot across Benin City, or ready for pickup at Akpakpava Road.</p>
+    </div>
+
+    <div class="flex justify-center mb-10">
+      <div class="glass rounded-full p-1 flex gap-1">
+        <button data-fulfill="delivery" class="fulfill-btn px-6 py-2.5 rounded-full text-sm font-display">Delivery</button>
+        <button data-fulfill="pickup" class="fulfill-btn px-6 py-2.5 rounded-full text-sm font-display">Pickup</button>
+      </div>
+    </div>
+
+    <div id="orderEmptyState" class="text-center py-20">
+      <p class="text-5xl mb-4">🛒</p>
+      <p class="font-display text-2xl mb-2">Your order is empty</p>
+      <p class="text-muted mb-6">Browse the menu and add a few favourites.</p>
+      <button data-go="menu" class="btn-gold px-7 py-3 rounded-full font-display">Browse the Menu</button>
+    </div>
+
+    <div id="orderContent" class="hidden grid md:grid-cols-[1fr,340px] gap-10 items-start">
+      <div id="orderLines" class="space-y-4"></div>
+
+      <div class="glass-strong rounded-2xl p-6 md:sticky md:top-[100px]">
+        <div id="deliveryAddressWrap" class="mb-5">
+          <label class="eyebrow block mb-2">Delivery Address</label>
+          <textarea id="deliveryAddress" rows="2" placeholder="e.g. 12 Ihama Road, GRA, Benin City" class="w-full bg-transparent hairline rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-gold"></textarea>
+        </div>
+        <div class="space-y-2 font-mono text-sm">
+          <div class="flex justify-between"><span class="text-muted">Subtotal</span><span id="sumSubtotal">₦0</span></div>
+          <div class="flex justify-between"><span class="text-muted" id="sumFeeLabel">Delivery Fee</span><span id="sumFee">₦0</span></div>
+          <div class="flex justify-between text-base pt-3 border-t border-line"><span>Total</span><span id="sumTotal" class="gold-text">₦0</span></div>
+        </div>
+        <button id="checkoutBtn" class="mt-6 w-full btn-gold rounded-full py-3 font-display">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PAGE: ORDER ONLINE -->
+
+<!-- ================================================================ -->
+<!-- PAGE: RESERVATION                                                 -->
+<!-- ================================================================ -->
+<section id="page-reserve" class="page hidden">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 pt-16 pb-28">
+    <div class="text-center mb-10" data-reveal>
+      <p class="eyebrow mb-3">✦ AI Reservation Concierge</p>
+      <h1 class="font-display text-5xl md:text-6xl">Reserve Your Table</h1>
+      <p id="conciergeLine" class="text-muted mt-4 max-w-md mx-auto">First, tell me when and for how many — I'll check the book.</p>
+    </div>
+
+    <div class="flex items-center justify-center gap-2 mb-10">
+      <span class="step-dot active" data-stepdot="0"></span>
+      <span class="step-dot" data-stepdot="1"></span>
+      <span class="step-dot" data-stepdot="2"></span>
+      <span class="step-dot" data-stepdot="3"></span>
+    </div>
+
+    <div class="glass-strong rounded-3xl p-7 md:p-10">
+
+      <div id="resStep0" class="res-step space-y-7">
+        <div>
+          <label class="eyebrow block mb-3">Choose a date</label>
+          <input type="date" id="resDate" class="w-full bg-transparent hairline rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold">
+        </div>
+        <div>
+          <label class="eyebrow block mb-3">Party size</label>
+          <div class="flex items-center gap-4">
+            <button id="guestDec" class="w-10 h-10 rounded-full hairline hover:border-gold transition-colors">−</button>
+            <span id="guestCount" class="font-display text-2xl w-10 text-center">2</span>
+            <button id="guestInc" class="w-10 h-10 rounded-full hairline hover:border-gold transition-colors">+</button>
+            <span class="text-muted text-sm">guests</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="resStep1" class="res-step hidden">
+        <label class="eyebrow block mb-4">Available times</label>
+        <div id="timeSlots" class="grid grid-cols-3 sm:grid-cols-4 gap-3"></div>
+      </div>
+
+      <div id="resStep2" class="res-step hidden space-y-7">
+        <div>
+          <label class="eyebrow block mb-3">Is this for an occasion?</label>
+          <div id="occasionChips" class="flex flex-wrap gap-2"></div>
+        </div>
+        <div>
+          <label class="eyebrow block mb-3">Special requests</label>
+          <textarea id="resNotes" rows="3" placeholder="Allergies, seating preference, anything else…" class="w-full bg-transparent hairline rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold"></textarea>
+        </div>
+      </div>
+
+      <div id="resStep3" class="res-step hidden">
+        <label class="eyebrow block mb-4">Review your reservation</label>
+        <div id="resSummary" class="space-y-3 font-mono text-sm glass rounded-2xl p-5"></div>
+        <div class="mt-6">
+          <label class="eyebrow block mb-3">Your details</label>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <input id="resName" placeholder="Full name" class="bg-transparent hairline rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+            <input id="resPhone" placeholder="Phone number" class="bg-transparent hairline rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mt-9">
+        <button id="resBack" class="btn-ghost rounded-full px-6 py-2.5 text-sm font-display glass invisible">Back</button>
+        <button id="resNext" class="btn-gold rounded-full px-7 py-2.5 text-sm font-display">Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PAGE: RESERVATION -->
+
+<!-- ================================================================ -->
+<!-- PAGE: GALLERY                                                     -->
+<!-- ================================================================ -->
+<section id="page-gallery" class="page hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-16 pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+      <p class="eyebrow mb-3">In Frame</p>
+      <h1 class="font-display text-5xl md:text-6xl">Gallery</h1>
+      <p class="text-muted mt-4">The plates, the room, and the people behind it.</p>
+    </div>
+    <div id="galleryFilters" class="flex justify-center gap-2 mb-10"></div>
+    <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[160px] md:auto-rows-[200px]"></div>
+  </div>
+</section>
+<!-- /PAGE: GALLERY -->
+
+<!-- ================================================================ -->
+<!-- PAGE: ABOUT                                                       -->
+<!-- ================================================================ -->
+<section id="page-about" class="page hidden">
+  <div class="max-w-5xl mx-auto px-5 md:px-8 pt-16 pb-28">
+
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+      <p class="eyebrow mb-3">Our Story</p>
+      <h1 class="font-display text-5xl md:text-6xl">About Lumière</h1>
+    </div>
+
+    <div data-reveal data-tilt data-tilt-max="3" data-tilt-lift="false" class="aspect-[16/7] rounded-3xl overflow-hidden mb-16 relative">
+      <img src="https://images.unsplash.com/photo-1666032119084-82351976a922?q=80&w=1600&auto=format&fit=crop" alt="The Lumière dining room" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    </div>
+
+    <div class="grid md:grid-cols-[280px,1fr] gap-10 items-center mb-20" data-reveal>
+      <div class="aspect-square rounded-2xl bg-gradient-to-br from-[#241d14] to-[#100d09] flex items-center justify-center text-5xl">👨🏾‍🍳</div>
+      <div>
+        <p class="eyebrow mb-3">Founder &amp; Executive Chef</p>
+        <h2 class="font-display text-3xl mb-4">Chef Osahon Eghosa</h2>
+        <p class="text-muted leading-relaxed">Osahon trained in Lagos and London before returning home to Benin City with one conviction: the dishes he grew up on deserved a fine-dining table of their own. Lumière opened in 2014 as a six-table room serving his mother's recipes, refined with classical technique — and has been quietly redefining what Nigerian fine dining can look like ever since.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-20">
+      <div class="glass rounded-2xl p-7" data-reveal>
+        <p class="eyebrow mb-3">Mission</p>
+        <p class="font-display text-xl leading-snug">To prove that West African cuisine belongs on the same stage as any culinary tradition in the world.</p>
+      </div>
+      <div class="glass rounded-2xl p-7" data-reveal>
+        <p class="eyebrow mb-3">Vision</p>
+        <p class="font-display text-xl leading-snug">A Lumière table in every major West African city — each one rooted in its own local market.</p>
+      </div>
+    </div>
+
+    <div class="mb-20">
+      <p class="eyebrow mb-3 text-center" data-reveal>Since 2014</p>
+      <h2 class="font-display text-3xl md:text-4xl text-center mb-12" data-reveal>The Journey</h2>
+      <div id="timelineList" class="max-w-2xl mx-auto space-y-8"></div>
+    </div>
+
+    <div data-reveal>
+      <p class="eyebrow mb-6 text-center">Recognition</p>
+      <div id="awardsList" class="flex flex-wrap justify-center gap-3"></div>
+    </div>
+
+  </div>
+</section>
+<!-- /PAGE: ABOUT -->
+
+<!-- ================================================================ -->
+<!-- PAGE: CONTACT                                                     -->
+<!-- ================================================================ -->
+<section id="page-contact" class="page hidden">
+  <div class="max-w-5xl mx-auto px-5 md:px-8 pt-16 pb-28">
+    <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+      <p class="eyebrow mb-3">Get in Touch</p>
+      <h1 class="font-display text-5xl md:text-6xl">Contact Us</h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10">
+      <form id="contactForm" class="glass rounded-2xl p-7 space-y-4 h-fit" data-reveal>
+        <input id="cName" required placeholder="Your name" class="w-full bg-transparent hairline rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold">
+        <input id="cEmail" required type="email" placeholder="Email address" class="w-full bg-transparent hairline rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold">
+        <textarea id="cMessage" required rows="4" placeholder="How can we help?" class="w-full bg-transparent hairline rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold"></textarea>
+        <button class="w-full btn-gold rounded-full py-3 font-display">Send Message</button>
+        <p id="contactMsg" class="hidden text-xs gold-text text-center">Message sent — we'll reply within a few hours.</p>
+      </form>
+
+      <div class="space-y-6" data-reveal>
+        <div class="aspect-[4/3] rounded-2xl glass relative overflow-hidden flex items-center justify-center">
+          <div class="absolute inset-0 opacity-40" style="background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:28px 28px;"></div>
+          <span class="text-3xl relative">📍</span>
+          <span class="absolute bottom-3 right-3 badge text-muted">Map preview</span>
+        </div>
+        <div class="space-y-3 text-sm">
+          <p class="flex items-baseline gap-3"><span class="eyebrow !text-[.62rem] w-16 shrink-0">Address</span><span class="text-muted">14 Akpakpava Road, Benin City, Edo State</span></p>
+          <p class="flex items-baseline gap-3"><span class="eyebrow !text-[.62rem] w-16 shrink-0">Phone</span><span class="text-muted font-mono">+234 803 555 0142</span></p>
+          <p class="flex items-baseline gap-3"><span class="eyebrow !text-[.62rem] w-16 shrink-0">Email</span><span class="text-muted font-mono">hello@lumiere-benincity.com</span></p>
+          <p class="flex items-baseline gap-3"><span class="eyebrow !text-[.62rem] w-16 shrink-0">Hours</span><span class="text-muted">Tue–Fri 12–10pm · Sat–Sun 11am–11pm</span></p>
+        </div>
+        <a href="https://wa.me/2348035550142" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 btn-gold rounded-full py-3 font-display">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1409" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1M21 11.5L20 21l-4.3-2.3"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /PAGE: CONTACT -->
+
+<!-- ================================================================ -->
+<!-- PAGE: ADMIN DASHBOARD (demo)                                      -->
+<!-- ================================================================ -->
+<section id="page-admin" class="page hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 pt-10 pb-28">
+
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-6" data-reveal>
+      <div>
+        <p class="eyebrow mb-2">Lumière OS · Owner Dashboard</p>
+        <h1 class="font-display text-3xl md:text-4xl">Good evening, Chef Osahon</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="badge px-3 py-2 rounded-full hairline">Saturday Service</span>
+        <div class="w-10 h-10 rounded-full btn-gold flex items-center justify-center font-mono text-xs font-bold">OE</div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl px-5 py-3 mb-8 flex items-center gap-3 text-xs text-muted" data-reveal>
+      <span class="gold-text">●</span> This is a live preview of the back-office dashboard built into your website — the same software, running on your data.
+    </div>
+
+    <div id="adminStats" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5"></div>
+
+    <div class="grid lg:grid-cols-2 gap-5 mb-5">
+      <div class="glass rounded-2xl p-6" data-reveal>
+        <div class="flex items-center justify-between mb-5">
+          <p class="eyebrow">Revenue — Last 12 Days</p>
+          <p class="font-mono text-xs gold-text">₦486k today</p>
+        </div>
+        <svg id="revenueChart" viewBox="0 0 560 200" class="w-full h-44"></svg>
+      </div>
+      <div class="glass rounded-2xl p-6" data-reveal>
+        <p class="eyebrow mb-5">Peak Order Times</p>
+        <div id="peakChart" class="flex items-end gap-1.5 h-44"></div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.6fr,1fr] gap-5 mb-5">
+      <div class="glass rounded-2xl p-6" data-reveal>
+        <p class="eyebrow mb-5">Recent Orders</p>
+        <div class="overflow-x-auto"><table class="w-full text-xs font-mono" id="ordersTable"></table></div>
+      </div>
+      <div class="space-y-5">
+        <div class="glass rounded-2xl p-6" data-reveal>
+          <p class="eyebrow mb-5">Top Selling Meals</p>
+          <div id="popularDishes" class="space-y-4"></div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center" data-reveal>
+          <p class="eyebrow mb-5 text-left">Customer Mix</p>
+          <div id="customerDonut" class="flex items-center justify-center"></div>
+          <div class="flex justify-center gap-4 mt-4 text-xs">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-gold inline-block"></span>Returning</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-burgundy inline-block"></span>New</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-6" data-reveal>
+      <p class="eyebrow mb-5">Delivery Tracking</p>
+      <div id="deliveryTracking" class="grid md:grid-cols-3 gap-5"></div>
+    </div>
+
+  </div>
+</section>
+<!-- /PAGE: ADMIN DASHBOARD -->
+
+
+<!-- ================================================================ -->
+<!-- FOOTER (persistent)                                               -->
+<!-- ================================================================ -->
+<footer class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div>
+      <p class="font-display text-2xl gold-text mb-3">LUMIÈRE</p>
+      <p class="text-muted text-sm max-w-xs">Modern Nigerian &amp; Continental fine dining. 14 Akpakpava Road, Benin City, Edo State.</p>
+      <div class="flex gap-3 mt-5">
+        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full hairline flex items-center justify-center hover:border-gold transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full hairline flex items-center justify-center hover:border-gold transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="WhatsApp" class="w-9 h-9 rounded-full hairline flex items-center justify-center hover:border-gold transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1M21 11.5L20 21l-4.3-2.3"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow mb-4">Explore</p>
+      <ul class="space-y-2 text-sm text-muted">
+        <li><a data-go="menu" class="hover:text-cream cursor-pointer">Menu</a></li>
+        <li><a data-go="reserve" class="hover:text-cream cursor-pointer">Reservations</a></li>
+        <li><a data-go="gallery" class="hover:text-cream cursor-pointer">Gallery</a></li>
+        <li><a data-go="about" class="hover:text-cream cursor-pointer">Our Story</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow mb-4">Hours</p>
+      <ul class="space-y-2 text-sm text-muted font-mono">
+        <li class="flex justify-between gap-6"><span>Tue – Fri</span><span>12pm – 10pm</span></li>
+        <li class="flex justify-between gap-6"><span>Sat – Sun</span><span>11am – 11pm</span></li>
+        <li class="flex justify-between gap-6"><span>Monday</span><span>Closed</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow mb-4">Stay in the Loop</p>
+      <p class="text-muted text-sm mb-4">New tasting menus, seasonal pairings, first booking access.</p>
+      <form id="newsletterForm" class="flex gap-2">
+        <input type="email" required placeholder="you@email.com" class="flex-1 min-w-0 bg-transparent hairline rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+        <button class="btn-gold rounded-full px-5 text-sm font-display shrink-0">Join</button>
+      </form>
+      <p id="newsletterMsg" class="text-xs gold-text mt-2 hidden">Welcome to the table — check your inbox.</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-6 border-t border-line flex flex-col sm:flex-row justify-between gap-3 text-xs text-muted">
+    <p>© 2026 Lumière Restaurant. All rights reserved.</p>
+    <p>Site &amp; digital experience by <span class="gold-text">your studio name here</span>.</p>
+  </div>
+</footer>
+
+</main>
+
+<!-- ============ CART FAB ============ -->
+<button id="cartFab" data-go="order" class="hidden fixed bottom-6 left-6 z-40 glass-strong rounded-full pl-4 pr-5 py-3 flex items-center gap-3 lift">
+  <span class="relative text-lg">🛒
+    <span id="cartBadge" class="hidden absolute -top-2 -right-2 w-5 h-5 rounded-full bg-burgundy text-[10px] flex items-center justify-center font-mono">0</span>
+  </span>
+  <span class="font-mono text-sm" id="cartFabTotal">₦0</span>
+</button>
+
+<!-- ============ AI FOOD ASSISTANT (floating) ============ -->
+<div id="assistant" class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+  <div id="assistantPanel" class="hidden w-[320px] max-w-[88vw] glass-strong rounded-3xl overflow-hidden shadow-2xl"></div>
+  <button id="assistantToggle" class="w-16 h-16 rounded-full btn-gold flex items-center justify-center relative">
+    <span id="assistantPing" class="absolute inset-0 rounded-full bg-gold/40 animate-ping"></span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1409" stroke-width="1.7"><path d="M12 3c-4.4 0-8 3.1-8 7 0 1.8.8 3.5 2.1 4.7L5 19l4.2-1.3c.9.2 1.8.3 2.8.3 4.4 0 8-3.1 8-7s-3.6-7-8-7Z"/><circle cx="9" cy="10" r=".8" fill="#1A1409"/><circle cx="12" cy="10" r=".8" fill="#1A1409"/><circle cx="15" cy="10" r=".8" fill="#1A1409"/></svg>
+  </button>
+</div>
+
+<!-- ============ CHECKOUT MODAL ============ -->
+<div id="checkoutModal" class="hidden fixed inset-0 z-[95] bg-black/80 backdrop-blur-sm flex items-center justify-center p-5">
+  <div class="glass-strong rounded-3xl max-w-md w-full p-7 relative">
+    <button id="checkoutClose" class="absolute top-5 right-5 text-muted hover:text-cream">✕</button>
+    <div id="checkoutStep1">
+      <p class="eyebrow mb-2">Checkout</p>
+      <h3 class="font-display text-2xl mb-5">Confirm &amp; Pay</h3>
+      <div class="space-y-3 mb-5">
+        <input id="ckName" placeholder="Full name" class="w-full bg-transparent hairline rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+        <input id="ckPhone" placeholder="Phone number" class="w-full bg-transparent hairline rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+        <input id="ckCard" placeholder="Card number (demo only)" class="w-full bg-transparent hairline rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-gold">
+      </div>
+      <div class="flex justify-between font-mono text-sm mb-5 pt-3 border-t border-line">
+        <span class="text-muted">Total due</span><span id="ckTotal" class="gold-text"></span>
+      </div>
+      <button id="placeOrderBtn" class="w-full btn-gold rounded-full py-3 font-display">Place Order</button>
+      <p class="text-xs text-muted text-center mt-3">Demo checkout — no real payment is processed.</p>
+    </div>
+    <div id="checkoutStep2" class="hidden text-center py-4">
+      <div class="w-16 h-16 rounded-full btn-gold flex items-center justify-center mx-auto mb-5 text-2xl">✓</div>
+      <h3 class="font-display text-2xl mb-2">Order Confirmed</h3>
+      <p class="text-muted text-sm mb-1">Order <span id="ckOrderNum" class="gold-text font-mono"></span></p>
+      <p class="text-muted text-sm mb-6">We'll text you when it's on the way.</p>
+      <button id="checkoutDone" class="btn-ghost rounded-full px-6 py-2.5 font-display glass">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESERVATION CONFIRM MODAL ============ -->
+<div id="reserveModal" class="hidden fixed inset-0 z-[95] bg-black/80 backdrop-blur-sm flex items-center justify-center p-5">
+  <div class="glass-strong rounded-3xl max-w-md w-full p-7 text-center relative">
+    <button id="reserveModalClose" class="absolute top-5 right-5 text-muted hover:text-cream">✕</button>
+    <div class="w-16 h-16 rounded-full btn-gold flex items-center justify-center mx-auto mb-5 text-2xl">✓</div>
+    <h3 class="font-display text-2xl mb-2">Table Reserved</h3>
+    <p id="reserveSummaryText" class="text-muted text-sm mb-2"></p>
+    <p class="text-xs text-muted mb-6">A confirmation will be sent by SMS. Reply anytime to reschedule.</p>
+    <button id="reserveModalDone" class="btn-gold rounded-full px-7 py-3 font-display">Done</button>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX (gallery) ============ -->
+<div id="lightbox" class="hidden fixed inset-0 z-[90] bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
+  <button id="lightboxClose" class="absolute top-6 right-6 w-10 h-10 rounded-full hairline flex items-center justify-center hover:border-gold">✕</button>
+  <button id="lightboxPrev" class="absolute left-4 md:left-8 w-11 h-11 rounded-full hairline flex items-center justify-center hover:border-gold">←</button>
+  <button id="lightboxNext" class="absolute right-4 md:right-8 w-11 h-11 rounded-full hairline flex items-center justify-center hover:border-gold">→</button>
+  <div id="lightboxBody" class="max-w-3xl w-full"></div>
+</div>
+
+<script>
+/* ========================================================================
+   DATA
+   ===================================================================== */
+
+const DISHES = [
+  // Starters
+  { id:'s1', name:'Suya Carpaccio', cat:'Starters', price:8500, desc:'Shaved beef tenderloin, yaji spice, pickled shallot, citrus oil.', icon:'🥩', popular:true, featured:true, grad:'from-[#3a2a1c] to-[#171210]', img:'https://images.unsplash.com/photo-1626323109697-df55d20f06a8?q=80&w=900&auto=format&fit=crop' },
+  { id:'s2', name:'Charred Plantain Bisque', cat:'Starters', price:6500, desc:'Smoked plantain, coconut cream, scotch bonnet oil.', icon:'🍲', popular:false, featured:false, grad:'from-[#3a2a14] to-[#16110c]', img:'https://images.unsplash.com/photo-1626627702449-e4aaf40372f9?q=80&w=900&auto=format&fit=crop' },
+  { id:'s3', name:'Oyster &amp; Ata Rodo', cat:'Starters', price:11000, desc:'Half-shell oysters, scotch bonnet mignonette, lime.', icon:'🦪', popular:false, featured:false, grad:'from-[#1c2c30] to-[#10141a]', img:'https://images.unsplash.com/photo-1775498011193-be0746a0e2fb?q=80&w=900&auto=format&fit=crop' },
+  { id:'s4', name:'Burrata &amp; Garden Ube', cat:'Starters', price:9500, desc:'Heirloom tomato, basil oil, aged balsamic, sea salt.', icon:'🍅', popular:false, featured:false, grad:'from-[#2c1414] to-[#150c0c]', img:'https://images.unsplash.com/photo-1641834992266-0524e539220a?q=80&w=900&auto=format&fit=crop' },
+
+  // Main Dishes
+  { id:'m1', name:'Lumière Jollof Risotto', cat:'Main Dishes', price:14500, desc:'Smoked jollof arborio, grilled prawn, crisp plantain.', icon:'🍤', popular:true, featured:true, grad:'from-[#3d2410] to-[#180f08]', img:'https://images.unsplash.com/photo-1634324092526-91f5e878b72f?q=80&w=900&auto=format&fit=crop' },
+  { id:'m2', name:'48-Hour Braised Oxtail', cat:'Main Dishes', price:18500, desc:'Red wine reduction, truffle mash, glazed heirloom carrot.', icon:'🍖', popular:true, featured:true, grad:'from-[#341417] to-[#160a0b]', img:'https://images.unsplash.com/photo-1610057098265-05f2bcbedd55?q=80&w=900&auto=format&fit=crop' },
+  { id:'m3', name:'Pepper Soup Consommé', cat:'Main Dishes', price:13000, desc:'Clarified catfish broth, scotch bonnet, scent leaf oil.', icon:'🐟', popular:false, featured:false, grad:'from-[#172a22] to-[#0c1612]', img:'https://images.unsplash.com/photo-1599354607448-8ad6e92b027a?q=80&w=900&auto=format&fit=crop' },
+  { id:'m4', name:'Herb-Crusted Lamb Rack', cat:'Main Dishes', price:21000, desc:'Rosemary jus, garlic confit potato, charred broccolini.', icon:'🍽️', popular:false, featured:false, grad:'from-[#2a2014] to-[#13100a]', img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=900&auto=format&fit=crop' },
+
+  // African Cuisine
+  { id:'a1', name:'Egusi Velouté', cat:'African Cuisine', price:12500, desc:'Melon seed, spinach, smoked turkey, swallow tuile.', icon:'🥘', popular:false, featured:false, grad:'from-[#26300f] to-[#11160a]', img:'https://images.unsplash.com/photo-1599354607448-8ad6e92b027a?q=80&w=900&auto=format&fit=crop' },
+  { id:'a2', name:'Nkwobi Croquettes', cat:'African Cuisine', price:9000, desc:'Cow foot, palm oil butter, ehuru spice, scotch bonnet aioli.', icon:'🧆', popular:false, featured:false, grad:'from-[#33210e] to-[#160f08]', img:'https://images.unsplash.com/photo-1566063114423-c438c40dcded?q=80&w=900&auto=format&fit=crop' },
+  { id:'a3', name:'Banga Risotto', cat:'African Cuisine', price:13500, desc:'Palm fruit broth, periwinkle, basmati, fresh thyme.', icon:'🍚', popular:false, featured:false, grad:'from-[#312712] to-[#15120a]', img:'https://images.unsplash.com/photo-1569058242252-623df46b5025?q=80&w=900&auto=format&fit=crop' },
+  { id:'a4', name:'Suya-Spiced Tenderloin', cat:'African Cuisine', price:17500, desc:'Yaji crust, charred tomato jam, fried plantain crisp.', icon:'🥩', popular:true, featured:false, grad:'from-[#3a2210] to-[#180f08]', img:'https://images.unsplash.com/photo-1626323109697-df55d20f06a8?q=80&w=900&auto=format&fit=crop' },
+
+  // Continental Cuisine
+  { id:'c1', name:'Truffle Tagliatelle', cat:'Continental Cuisine', price:16000, desc:'Wild mushroom, parmesan, fresh black truffle.', icon:'🍝', popular:false, featured:false, grad:'from-[#241f12] to-[#100e08]', img:'https://images.unsplash.com/photo-1599731316496-a3018cde6bda?q=80&w=900&auto=format&fit=crop' },
+  { id:'c2', name:'Seared Duck Breast', cat:'Continental Cuisine', price:19500, desc:'Cherry gastrique, fondant potato, baby leek.', icon:'🦆', popular:false, featured:false, grad:'from-[#2e1414] to-[#140a0a]', img:'https://images.unsplash.com/photo-1610057098265-05f2bcbedd55?q=80&w=900&auto=format&fit=crop' },
+  { id:'c3', name:'Mediterranean Sea Bass', cat:'Continental Cuisine', price:20500, desc:'Olive tapenade, charred lemon, fennel slaw.', icon:'🐠', popular:false, featured:false, grad:'from-[#13262a] to-[#0a1416]', img:'https://images.unsplash.com/photo-1565686481561-d8ceaa689e01?q=80&w=900&auto=format&fit=crop' },
+  { id:'c4', name:'Beef Wellington', cat:'Continental Cuisine', price:24500, desc:'Puff pastry, mushroom duxelles, red wine jus.', icon:'🥧', popular:true, featured:false, grad:'from-[#2c1c10] to-[#130f08]', img:'https://images.unsplash.com/photo-1643757343278-5d50309dfa44?q=80&w=900&auto=format&fit=crop' },
+
+  // Desserts
+  { id:'d1', name:'Chin-Chin Tiramisu', cat:'Desserts', price:7000, desc:'Espresso-soaked chin chin, mascarpone, cocoa dust.', icon:'🍰', popular:true, featured:true, grad:'from-[#2a1d10] to-[#130f08]', img:'https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=900&auto=format&fit=crop' },
+  { id:'d2', name:'Zobo Sorbet Trio', cat:'Desserts', price:6000, desc:'Hibiscus, ginger and ataya sorbet, candied citrus.', icon:'🍨', popular:false, featured:false, grad:'from-[#2a1018] to-[#13090d]', img:'https://images.unsplash.com/photo-1765268811766-aaa41dac9dbe?q=80&w=900&auto=format&fit=crop' },
+  { id:'d3', name:'Dark Chocolate Fondant', cat:'Desserts', price:7500, desc:'Molten centre, coconut ice cream, gold leaf.', icon:'🍫', popular:false, featured:false, grad:'from-[#1c140e] to-[#0d0a07]', img:'https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=900&auto=format&fit=crop' },
+  { id:'d4', name:'Coconut Crème Brûlée', cat:'Desserts', price:6800, desc:'Candied coconut, Madagascar vanilla bean.', icon:'🍮', popular:false, featured:false, grad:'from-[#2a230f] to-[#131008]', img:'https://images.unsplash.com/photo-1765268811766-aaa41dac9dbe?q=80&w=900&auto=format&fit=crop' },
+
+  // Drinks
+  { id:'w1', name:'Zobo Spritz', cat:'Drinks', price:5500, desc:'Hibiscus, rosemary, soda, orange twist.', icon:'🍹', popular:true, featured:false, grad:'from-[#2a0f16] to-[#13080b]', img:'https://images.unsplash.com/photo-1514359652734-6205dd477a1e?q=80&w=900&auto=format&fit=crop' },
+  { id:'w2', name:'Palm Wine Bellini', cat:'Drinks', price:7000, desc:'Sparkling palm wine, white peach purée.', icon:'🥂', popular:false, featured:false, grad:'from-[#2a2410] to-[#131008]', img:'https://images.unsplash.com/photo-1574966739987-65e38db0f7ce?q=80&w=900&auto=format&fit=crop' },
+  { id:'w3', name:'Chapman Royale', cat:'Drinks', price:5000, desc:'House chapman, premium garnish, bitters.', icon:'🍷', popular:false, featured:false, grad:'from-[#2c1012] to-[#140909]', img:'https://images.unsplash.com/photo-1514359652734-6205dd477a1e?q=80&w=900&auto=format&fit=crop' },
+  { id:'w4', name:'Tamarind Old Fashioned', cat:'Drinks', price:8500, desc:'Bourbon, tamarind, orange bitters, smoked rim.', icon:'🥃', popular:false, featured:false, grad:'from-[#241a0e] to-[#110d07]', img:'https://images.unsplash.com/photo-1514359652734-6205dd477a1e?q=80&w=900&auto=format&fit=crop' },
+];
+
+const CATEGORIES = ['All','Starters','Main Dishes','African Cuisine','Continental Cuisine','Desserts','Drinks'];
+
+const WHY_US = [
+  { title:'Fresh, Local Ingredients', desc:'Sourced daily from Oba Market growers and trusted regional farms.', icon:'🌿' },
+  { title:'Award-Trained Chefs', desc:'A kitchen led by chefs trained across Lagos, London and Accra.', icon:'👨🏾‍🍳' },
+  { title:'30-Minute Delivery', desc:'Hot, plated and boxed for transport across Benin City.', icon:'⏱️' },
+  { title:'A Premium Experience', desc:'Candlelight, curated playlists, and service that remembers your name.', icon:'✨' },
+];
+
+const TESTIMONIALS = [
+  { name:'Adaeze O.', role:'Regular Guest', quote:'Every course felt considered. The oxtail alone is worth the drive across town.', avatar:'AO' },
+  { name:'Tunde B.', role:'Anniversary Dinner', quote:'We booked for our anniversary and the team quietly upgraded the whole evening.', avatar:'TB' },
+  { name:'Efe I.', role:'Food Blogger, @efeeats', quote:'Nigerian flavour, fine-dining technique. The jollof risotto is unlike anything in the city.', avatar:'EI' },
+  { name:'Grace M.', role:'Corporate Client', quote:'We hosted twelve clients here. The private room and pacing of service were flawless.', avatar:'GM' },
+];
+
+const STATS = [
+  { value:50000, suffix:'+', label:'Meals Served' },
+  { value:4.9, suffix:'', label:'Average Rating', decimals:1 },
+  { value:10, suffix:'yrs', label:'Of Experience' },
+  { value:15000, suffix:'+', label:'Happy Customers' },
+];
+
+const INSTA = [
+  { img:'https://images.unsplash.com/photo-1634324092526-91f5e878b72f?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1643101570532-88c8ecc07c1f?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1514359652734-6205dd477a1e?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1666032119084-82351976a922?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1610057098265-05f2bcbedd55?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1775498011193-be0746a0e2fb?q=80&w=700&auto=format&fit=crop' },
+  { img:'https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=700&auto=format&fit=crop' },
+];
+
+const GALLERY_ITEMS = [
+  { cat:'Food', title:'48-Hour Oxtail', tall:true, img:'https://images.unsplash.com/photo-1610057098265-05f2bcbedd55?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Interior', title:'The Main Room', tall:false, img:'https://images.unsplash.com/photo-1666032119084-82351976a922?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Suya Carpaccio', tall:false, img:'https://images.unsplash.com/photo-1626323109697-df55d20f06a8?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Interior', title:'The Wine Wall', tall:true, img:'https://images.unsplash.com/photo-1574966739987-65e38db0f7ce?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Chin-Chin Tiramisu', tall:false, img:'https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Jollof Risotto', tall:true, img:'https://images.unsplash.com/photo-1634324092526-91f5e878b72f?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Interior', title:'The Chef\'s Table', tall:false, img:'https://images.unsplash.com/photo-1643101570532-88c8ecc07c1f?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Interior', title:'Private Dining', tall:false, img:'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Zobo Spritz', tall:false, img:'https://images.unsplash.com/photo-1514359652734-6205dd477a1e?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Egusi Velouté', tall:true, img:'https://images.unsplash.com/photo-1599354607448-8ad6e92b027a?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Interior', title:'The Courtyard', tall:false, img:'https://images.unsplash.com/photo-1666032119084-82351976a922?q=80&w=900&auto=format&fit=crop' },
+  { cat:'Food', title:'Beef Wellington', tall:false, img:'https://images.unsplash.com/photo-1643757343278-5d50309dfa44?q=80&w=900&auto=format&fit=crop' },
+];
+
+const AWARDS = [
+  'Benin City Restaurant Awards — Best Fine Dining, 2025',
+  'Edo Tourism Board — Culinary Excellence, 2024',
+  'Naija Food Critics — Top 10 New Openings, 2023',
+  'Featured — Condé Nast Traveler West Africa, 2024',
+];
+
+const TIMELINE = [
+  { year:'2014', text:'Chef Osahon Eghosa opens a six-table dining room on Sapele Road, cooking family recipes for friends.' },
+  { year:'2018', text:'Lumière moves to Akpakpava Road; the open kitchen and wine wall are built.' },
+  { year:'2021', text:'The tasting menu launches, pairing Nigerian heritage dishes with continental technique.' },
+  { year:'2025', text:'Named Best Fine Dining in Benin City; private dining room opens for twelve.' },
+];
+
+/* ---- Admin dashboard demo data ---- */
+const ADMIN_STATS = [
+  { label:'Revenue Today', value:'₦486,200', delta:'+12.4%', up:true },
+  { label:'Orders Today', value:'63', delta:'+8.1%', up:true },
+  { label:'Reservations', value:'24', delta:'+3 vs last Sat', up:true },
+  { label:'New Customers', value:'17', delta:'-2.0%', up:false },
+];
+const REVENUE_SERIES = [180,210,195,260,300,280,340,390,360,420,460,486]; // last 12 days, ₦'000
+const POPULAR_DISHES = [
+  { name:'Lumière Jollof Risotto', pct:92 }, { name:'48-Hour Braised Oxtail', pct:84 },
+  { name:'Suya Carpaccio', pct:77 }, { name:'Chin-Chin Tiramisu', pct:68 }, { name:'Zobo Spritz', pct:55 },
+];
+const PEAK_HOURS = [
+  { h:'12p', v:18 },{ h:'1p', v:34 },{ h:'2p', v:22 },{ h:'3p', v:10 },{ h:'4p', v:8 },
+  { h:'5p', v:14 },{ h:'6p', v:38 },{ h:'7p', v:62 },{ h:'8p', v:71 },{ h:'9p', v:48 },{ h:'10p', v:21 },
+];
+const RECENT_ORDERS = [
+  { id:'#LM-2291', customer:'Adaeze O.', items:'Oxtail, Zobo Spritz', total:24000, status:'Delivered' },
+  { id:'#LM-2290', customer:'Tunde B.', items:'Jollof Risotto x2', total:29000, status:'On the way' },
+  { id:'#LM-2289', customer:'Grace M.', items:'Wellington, Tagliatelle', total:43000, status:'Preparing' },
+  { id:'#LM-2288', customer:'Efe I.', items:'Suya Carpaccio, Fondant', total:16000, status:'Delivered' },
+  { id:'#LM-2287', customer:'Kelechi N.', items:'Lamb Rack, Bellini', total:28000, status:'Delivered' },
+  { id:'#LM-2286', customer:'Blessing A.', items:'Egusi Velouté', total:12500, status:'Cancelled' },
+];
+const DELIVERY_TRACKING = [
+  { id:'#LM-2290', customer:'Tunde B.', stage:2 },
+  { id:'#LM-2289', customer:'Grace M.', stage:1 },
+  { id:'#LM-2293', customer:'Osaze P.', stage:0 },
+];
+const STAGES = ['Preparing','On the way','Delivered'];
+
+/* ---- AI assistant decision data ---- */
+const CRAVING_MAP = {
+  'Spicy':['s1','m3','a4','w1'], 'Savory':['m2','c4','a1','m1'], 'Light':['c3','s4','d2','s3'], 'Sweet':['d1','d3','d4','w2'],
+};
+
+/* ========================================================================
+   UTILITIES
+   ===================================================================== */
+const naira = n => '₦' + n.toLocaleString('en-NG');
+const byId = id => DISHES.find(d => d.id === id);
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+function dishPlate(d, extraClasses=''){
+  return `
+  <div class="plate aspect-[4/3] rounded-2xl overflow-hidden relative ${extraClasses}">
+    <img src="${d.img}" alt="${d.name}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-black/10"></div>
+    ${d.popular ? `<span class="badge absolute top-3 left-3 px-2.5 py-1 rounded-full bg-burgundy/90 text-cream z-10">Popular</span>` : ''}
+  </div>`;
+}
+
+/* ========================================================================
+   RENDER: HOME
+   ===================================================================== */
+function renderFeatured(){
+  const featured = DISHES.filter(d => d.featured).slice(0,6);
+  $('#featuredGrid').innerHTML = featured.map((d,i) => `
+    <article data-reveal data-tilt class="group glass rounded-2xl overflow-hidden lift ${i===0 ? 'md:col-span-2 md:row-span-2' : ''}">
+      ${dishPlate(d, i===0 ? '!aspect-auto md:h-full' : '')}
+      <div class="p-5">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-display text-lg md:text-xl">${d.name}</h3>
+          <span class="font-mono text-sm gold-text shrink-0">${naira(d.price)}</span>
+        </div>
+        <p class="text-muted text-sm mt-2">${d.desc}</p>
+        <button data-add="${d.id}" class="mt-4 eyebrow !tracking-normal !text-cream/80 underline-grow !text-xs">Add to Order →</button>
+      </div>
+    </article>`).join('');
+  bindAddButtons();
+  initTilt();
+}
+
+function renderWhy(){
+  $('#whyGrid').innerHTML = WHY_US.map(w => `
+    <div data-reveal data-tilt data-tilt-max="7" class="glass rounded-2xl p-6 lift">
+      <div class="text-3xl mb-4">${w.icon}</div>
+      <h3 class="font-display text-lg mb-2">${w.title}</h3>
+      <p class="text-muted text-sm leading-relaxed">${w.desc}</p>
+    </div>`).join('');
+  initTilt();
+}
+
+let tIndex = 0, tTimer = null;
+function renderTestimonial(){
+  const t = TESTIMONIALS[tIndex];
+  $('#testimonialBody').innerHTML = `
+    <p class="font-display text-2xl md:text-3xl leading-snug max-w-2xl">"${t.quote}"</p>
+    <div class="flex items-center gap-3 mt-7">
+      <div class="w-10 h-10 rounded-full btn-gold flex items-center justify-center font-mono text-xs font-bold">${t.avatar}</div>
+      <div class="text-left">
+        <p class="text-sm font-medium">${t.name}</p>
+        <p class="text-xs text-muted">${t.role}</p>
+      </div>
+      <div class="flex gap-0.5 ml-2">${'★★★★★'.split('').map(()=>`<span class="gold-text text-xs">★</span>`).join('')}</div>
+    </div>`;
+  $('#testimonialDots').innerHTML = TESTIMONIALS.map((_,i) => `
+    <button data-tdot="${i}" class="w-2 h-2 rounded-full transition-all ${i===tIndex ? 'bg-gold w-6' : 'bg-line'}"></button>`).join('');
+  $$('[data-tdot]').forEach(b => b.addEventListener('click', () => { tIndex = +b.dataset.tdot; renderTestimonial(); restartTestimonialTimer(); }));
+}
+function restartTestimonialTimer(){
+  if (tTimer) clearInterval(tTimer);
+  tTimer = setInterval(() => { tIndex = (tIndex+1) % TESTIMONIALS.length; renderTestimonial(); }, 6000);
+}
+
+function renderStats(){
+  $('#statsGrid').innerHTML = STATS.map(s => `
+    <div data-reveal class="text-center px-3">
+      <p class="font-display text-4xl md:text-5xl gold-text" data-counter data-target="${s.value}" data-suffix="${s.suffix}" data-decimals="${s.decimals||0}">0</p>
+      <p class="eyebrow mt-3 !text-[.62rem]">${s.label}</p>
+    </div>`).join('');
+}
+
+function renderInsta(){
+  $('#instaGrid').innerHTML = INSTA.map(p => `
+    <div data-reveal data-tilt data-tilt-max="5" class="aspect-square rounded-xl lift cursor-pointer relative group overflow-hidden">
+      <img src="${p.img}" alt="Lumière on Instagram" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100">
+        <span class="text-xs font-mono text-cream">♥ ${Math.floor(80+Math.random()*400)}</span>
+      </div>
+    </div>`).join('');
+  initTilt();
+}
+
+function animateCounter(el){
+  const target = parseFloat(el.dataset.target), decimals = +el.dataset.decimals, suffix = el.dataset.suffix;
+  const dur = 1600, start = performance.now();
+  function tick(now){
+    const p = Math.min(1, (now-start)/dur);
+    const eased = 1 - Math.pow(1-p, 3);
+    const val = target * eased;
+    el.textContent = (decimals ? val.toFixed(decimals) : Math.floor(val).toLocaleString('en-NG')) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ========================================================================
+   NAVIGATION / ROUTING (single-file, multi "page" SPA)
+   ===================================================================== */
+const PAGES = [
+  { id:'home',    label:'Home',     numeral:'I' },
+  { id:'menu',    label:'Menu',     numeral:'II' },
+  { id:'order',   label:'Order',    numeral:'III' },
+  { id:'reserve', label:'Reserve',  numeral:'IV' },
+  { id:'gallery', label:'Gallery',  numeral:'V' },
+  { id:'about',   label:'About',    numeral:'VI' },
+  { id:'contact', label:'Contact',  numeral:'VII' },
+  { id:'admin',   label:'Dashboard',numeral:'VIII' },
+];
+let currentPage = 'home';
+
+function buildRail(){
+  const rail = $('#rail');
+  rail.innerHTML = '<div class="rail-line"></div>' + PAGES.map(p => `
+    <div class="rail-item" data-rail="${p.id}" title="${p.label}">
+      <span class="rail-num font-display">${p.numeral}</span>
+      <span class="rail-dot"></span>
+    </div>`).join('');
+  $$('[data-rail]').forEach(el => el.addEventListener('click', () => go(el.dataset.rail)));
+}
+function updateRail(){
+  $$('[data-rail]').forEach(el => el.classList.toggle('active', el.dataset.rail === currentPage));
+}
+
+function go(pageId){
+  if (!document.getElementById('page-'+pageId)) return;
+  // mobile menu close
+  $('#mobileMenu').classList.add('hidden');
+  // sweep transition
+  const sweep = $('#sweep');
+  sweep.classList.remove('run'); void sweep.offsetWidth; sweep.classList.add('run');
+
+  $$('.page').forEach(s => s.classList.add('hidden'));
+  const target = document.getElementById('page-'+pageId);
+  target.classList.remove('hidden');
+  target.classList.remove('page'); void target.offsetWidth; target.classList.add('page'); // restart animation
+  currentPage = pageId;
+  window.scrollTo({ top:0, behavior:'instant' in document.documentElement.style ? 'instant' : 'auto' });
+
+  $$('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.go === pageId));
+  updateRail();
+  document.body.classList.toggle('admin-mode', pageId === 'admin');
+  refreshReveal();
+  if (pageId === 'admin') drawAdminCharts();
+}
+$$('[data-go]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); go(el.dataset.go); }));
+
+$('#burger').addEventListener('click', () => $('#mobileMenu').classList.toggle('hidden'));
+$('#scrollHint').addEventListener('click', () => window.scrollBy({ top: window.innerHeight*0.85, behavior:'smooth' }));
+
+/* ---- scroll reveal ---- */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
+}, { threshold:.15 });
+function refreshReveal(){
+  $$('[data-reveal]:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+/* ---- counters ---- */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting){ animateCounter(e.target); counterObserver.unobserve(e.target); } });
+}, { threshold:.4 });
+function observeCounters(){ $$('[data-counter]').forEach(el => counterObserver.observe(el)); }
+
+/* ---- 3D tilt-on-hover (cards + primary CTAs) ---- */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+function initTilt(){
+  if (prefersReducedMotion || !canHover) return;
+  $$('[data-tilt]:not([data-tilt-bound])').forEach(el => {
+    el.setAttribute('data-tilt-bound', '1');
+    const max = parseFloat(el.dataset.tiltMax || 9);
+    const lift = el.dataset.tiltLift === 'false' ? 0 : 6;
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      const rx = (0.5 - py) * max * 2;
+      const ry = (px - 0.5) * max * 2;
+      el.style.transform = `perspective(900px) translateY(-${lift}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+}
+
+/* ---- hero scroll parallax (separate layer from the Ken Burns zoom) ---- */
+(function initHeroParallax(){
+  const wrap = document.getElementById('heroBgWrap');
+  if (!wrap || prefersReducedMotion) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = Math.min(window.scrollY, 800);
+      wrap.style.transform = `translateY(${y * 0.18}px)`;
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+/* ========================================================================
+   CART (shared by Menu + Order Online pages)
+   ===================================================================== */
+let CART = []; // [{id, qty}]
+const DELIVERY_FEE = 1500;
+
+function addToCart(id){
+  const line = CART.find(l => l.id === id);
+  if (line) line.qty++; else CART.push({ id, qty:1 });
+  renderCartBadge();
+  if (typeof renderOrderPage === 'function') renderOrderPage();
+  toast(`${byId(id).name} added to your order`);
+}
+function removeFromCart(id){ CART = CART.filter(l => l.id !== id); renderCartBadge(); if (typeof renderOrderPage === 'function') renderOrderPage(); }
+function setQty(id, qty){
+  if (qty <= 0) return removeFromCart(id);
+  const line = CART.find(l => l.id === id); if (line) line.qty = qty;
+  renderCartBadge(); if (typeof renderOrderPage === 'function') renderOrderPage();
+}
+function cartCount(){ return CART.reduce((s,l) => s+l.qty, 0); }
+function cartSubtotal(){ return CART.reduce((s,l) => s + byId(l.id).price * l.qty, 0); }
+function renderCartBadge(){
+  const badge = $('#cartBadge'), fab = $('#cartFab'), fabTotal = $('#cartFabTotal');
+  const count = cartCount();
+  if (badge){ badge.textContent = count; badge.classList.toggle('hidden', count === 0); }
+  if (fab) fab.classList.toggle('hidden', count === 0);
+  if (fabTotal) fabTotal.textContent = naira(cartSubtotal());
+}
+function bindAddButtons(){
+  $$('[data-add]').forEach(btn => btn.onclick = () => addToCart(btn.dataset.add));
+}
+
+/* ---- lightweight toast ---- */
+function toast(msg){
+  let t = $('#toastEl');
+  if (!t){
+    t = document.createElement('div');
+    t.id = 'toastEl';
+    t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[95] glass-strong px-5 py-3 rounded-full text-sm font-mono transition-all duration-300';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1'; t.style.transform = 'translate(-50%, 0)';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translate(-50%, 10px)'; }, 2200);
+}
+
+/* ---- newsletter (demo, no backend) ---- */
+$('#newsletterForm').addEventListener('submit', e => {
+  e.preventDefault();
+  $('#newsletterMsg').classList.remove('hidden');
+  e.target.reset();
+});
+
+/* ========================================================================
+   RENDER: MENU PAGE
+   ===================================================================== */
+let menuFilter = 'All', menuQuery = '';
+function renderMenuFilters(){
+  $('#menuFilters').innerHTML = CATEGORIES.map(c => `
+    <button data-cat="${c}" class="badge px-4 py-2 rounded-full border whitespace-nowrap transition-colors ${c===menuFilter ? 'bg-gold text-[#1A1409] border-gold' : 'border-line text-muted hover:border-gold/50'}">${c}</button>`).join('');
+  $$('[data-cat]').forEach(b => b.onclick = () => { menuFilter = b.dataset.cat; renderMenuFilters(); renderMenuGrid(); });
+}
+function renderMenuGrid(){
+  const q = menuQuery.trim().toLowerCase();
+  const items = DISHES.filter(d => (menuFilter==='All' || d.cat===menuFilter) && (d.name.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q)));
+  $('#menuGrid').innerHTML = items.map(d => `
+    <article data-reveal data-tilt class="group glass rounded-2xl overflow-hidden lift">
+      ${dishPlate(d)}
+      <div class="p-5">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-display text-lg">${d.name}</h3>
+          <span class="font-mono text-sm gold-text shrink-0">${naira(d.price)}</span>
+        </div>
+        <p class="eyebrow !text-[.6rem] mt-1">${d.cat}</p>
+        <p class="text-muted text-sm mt-2">${d.desc}</p>
+        <button data-add="${d.id}" class="mt-4 w-full btn-ghost rounded-full py-2.5 text-sm font-display">Add to Order</button>
+      </div>
+    </article>`).join('');
+  $('#menuEmpty').classList.toggle('hidden', items.length>0);
+  bindAddButtons();
+  refreshReveal();
+  initTilt();
+}
+$('#menuSearch').addEventListener('input', e => { menuQuery = e.target.value; renderMenuGrid(); });
+
+/* ========================================================================
+   RENDER: ORDER ONLINE PAGE
+   ===================================================================== */
+let fulfillMode = 'delivery';
+
+function renderOrderPage(){
+  const empty = $('#orderEmptyState'), content = $('#orderContent');
+  if (!empty || !content) return;
+  const hasItems = CART.length > 0;
+  empty.classList.toggle('hidden', hasItems);
+  content.classList.toggle('hidden', !hasItems);
+  if (!hasItems) return;
+
+  $('#orderLines').innerHTML = CART.map(line => {
+    const d = byId(line.id);
+    return `
+    <div class="glass rounded-2xl p-4 flex items-center gap-4 flex-wrap" data-reveal>
+      <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${d.grad} flex items-center justify-center text-xl shrink-0">${d.icon}</div>
+      <div class="flex-1 min-w-[120px]">
+        <p class="font-display">${d.name}</p>
+        <p class="font-mono text-xs text-muted">${naira(d.price)} each</p>
+      </div>
+      <div class="flex items-center gap-3 glass rounded-full px-3 py-1.5">
+        <button data-dec="${d.id}" class="w-6 h-6 rounded-full hover:bg-white/10 transition-colors">−</button>
+        <span class="font-mono text-sm w-5 text-center">${line.qty}</span>
+        <button data-inc="${d.id}" class="w-6 h-6 rounded-full hover:bg-white/10 transition-colors">+</button>
+      </div>
+      <p class="font-mono text-sm w-24 text-right shrink-0">${naira(d.price*line.qty)}</p>
+      <button data-remove="${d.id}" class="text-muted hover:text-burgundy transition-colors shrink-0">✕</button>
+    </div>`;
+  }).join('');
+
+  $$('[data-inc]').forEach(b => b.onclick = () => setQty(b.dataset.inc, (CART.find(l=>l.id===b.dataset.inc).qty)+1));
+  $$('[data-dec]').forEach(b => b.onclick = () => setQty(b.dataset.dec, (CART.find(l=>l.id===b.dataset.dec).qty)-1));
+  $$('[data-remove]').forEach(b => b.onclick = () => removeFromCart(b.dataset.remove));
+
+  const sub = cartSubtotal();
+  const fee = fulfillMode === 'delivery' ? DELIVERY_FEE : 0;
+  $('#sumSubtotal').textContent = naira(sub);
+  $('#sumFeeLabel').textContent = fulfillMode === 'delivery' ? 'Delivery Fee' : 'Pickup Fee';
+  $('#sumFee').textContent = naira(fee);
+  $('#sumTotal').textContent = naira(sub+fee);
+  $('#deliveryAddressWrap').classList.toggle('hidden', fulfillMode !== 'delivery');
+  refreshReveal();
+}
+
+$$('[data-fulfill]').forEach(b => b.addEventListener('click', () => {
+  fulfillMode = b.dataset.fulfill;
+  $$('[data-fulfill]').forEach(x => x.classList.toggle('active', x.dataset.fulfill === fulfillMode));
+  renderOrderPage();
+}));
+
+$('#checkoutBtn').addEventListener('click', () => {
+  if (fulfillMode === 'delivery' && !$('#deliveryAddress').value.trim()){
+    toast('Please add a delivery address');
+    $('#deliveryAddress').focus();
+    return;
+  }
+  $('#checkoutStep1').classList.remove('hidden'); $('#checkoutStep2').classList.add('hidden');
+  $('#ckTotal').textContent = naira(cartSubtotal() + (fulfillMode==='delivery'?DELIVERY_FEE:0));
+  $('#checkoutModal').classList.remove('hidden');
+});
+$('#checkoutClose').addEventListener('click', () => $('#checkoutModal').classList.add('hidden'));
+$('#placeOrderBtn').addEventListener('click', () => {
+  if (!$('#ckName').value.trim() || !$('#ckPhone').value.trim()){ toast('Please add your name and phone number'); return; }
+  $('#ckOrderNum').textContent = '#LM-' + Math.floor(2300+Math.random()*200);
+  $('#checkoutStep1').classList.add('hidden'); $('#checkoutStep2').classList.remove('hidden');
+});
+$('#checkoutDone').addEventListener('click', () => {
+  $('#checkoutModal').classList.add('hidden');
+  CART = []; renderCartBadge(); renderOrderPage();
+  $('#ckName').value=''; $('#ckPhone').value=''; $('#ckCard').value=''; $('#deliveryAddress').value='';
+});
+
+/* ========================================================================
+   RESERVATION PAGE — AI Concierge guided stepper
+   ===================================================================== */
+let resStep = 0, resGuests = 2, resTime = null, resOccasion = 'None';
+const OCCASIONS = ['None','Birthday','Anniversary','Date Night','Business'];
+const TIME_SLOTS = ['12:00pm','1:00pm','2:00pm','6:00pm','6:30pm','7:00pm','7:30pm','8:00pm','8:30pm','9:00pm'];
+const CONCIERGE_LINES = [
+  "First, tell me when and for how many — I'll check the book.",
+  "Here's what's open that evening.",
+  "Noted. Anything I should tell the kitchen or your host?",
+  "One last look before I lock in your table.",
+];
+
+function setResStep(i){
+  resStep = i;
+  $$('.res-step').forEach((s,idx) => s.classList.toggle('hidden', idx!==i));
+  $$('[data-stepdot]').forEach((d,idx) => d.classList.toggle('active', idx<=i));
+  $('#conciergeLine').textContent = CONCIERGE_LINES[i];
+  $('#resBack').classList.toggle('invisible', i===0);
+  $('#resNext').textContent = i===3 ? 'Confirm Reservation' : 'Next';
+  if (i===1) renderTimeSlots();
+  if (i===2) renderOccasionChips();
+  if (i===3) renderResSummary();
+}
+function renderTimeSlots(){
+  $('#timeSlots').innerHTML = TIME_SLOTS.map(t => `<button data-slot="${t}" class="slot rounded-xl py-2.5 text-sm font-mono text-center ${t===resTime?'active':''}">${t}</button>`).join('');
+  $$('[data-slot]').forEach(b => b.onclick = () => { resTime = b.dataset.slot; renderTimeSlots(); });
+}
+function renderOccasionChips(){
+  $('#occasionChips').innerHTML = OCCASIONS.map(o => `<button data-occ="${o}" class="chip px-4 py-2 rounded-full text-sm ${o===resOccasion?'active':''}">${o}</button>`).join('');
+  $$('[data-occ]').forEach(b => b.onclick = () => { resOccasion = b.dataset.occ; renderOccasionChips(); });
+}
+function fmtResDate(){
+  const v = $('#resDate').value;
+  return v ? new Date(v+'T00:00').toLocaleDateString('en-GB',{ weekday:'long', day:'numeric', month:'long' }) : '—';
+}
+function renderResSummary(){
+  $('#resSummary').innerHTML = `
+    <div class="flex justify-between"><span class="text-muted">Date</span><span>${fmtResDate()}</span></div>
+    <div class="flex justify-between"><span class="text-muted">Time</span><span>${resTime||'—'}</span></div>
+    <div class="flex justify-between"><span class="text-muted">Guests</span><span>${resGuests}</span></div>
+    <div class="flex justify-between"><span class="text-muted">Occasion</span><span>${resOccasion}</span></div>`;
+}
+$('#guestInc').addEventListener('click', () => { resGuests = Math.min(12, resGuests+1); $('#guestCount').textContent = resGuests; });
+$('#guestDec').addEventListener('click', () => { resGuests = Math.max(1, resGuests-1); $('#guestCount').textContent = resGuests; });
+
+$('#resNext').addEventListener('click', () => {
+  if (resStep===0 && !$('#resDate').value){ toast('Pick a date first'); return; }
+  if (resStep===1 && !resTime){ toast('Pick a time slot'); return; }
+  if (resStep===3){
+    if (!$('#resName').value.trim() || !$('#resPhone').value.trim()){ toast('Add your name and phone number'); return; }
+    $('#reserveSummaryText').textContent = `${resGuests} guests · ${fmtResDate()} · ${resTime}`;
+    $('#reserveModal').classList.remove('hidden');
+    return;
+  }
+  setResStep(Math.min(3, resStep+1));
+});
+$('#resBack').addEventListener('click', () => setResStep(Math.max(0, resStep-1)));
+$('#reserveModalClose').addEventListener('click', () => $('#reserveModal').classList.add('hidden'));
+$('#reserveModalDone').addEventListener('click', () => {
+  $('#reserveModal').classList.add('hidden');
+  resStep=0; resTime=null; resOccasion='None'; resGuests=2;
+  $('#resDate').value=''; $('#resName').value=''; $('#resPhone').value=''; $('#resNotes').value='';
+  $('#guestCount').textContent = 2;
+  setResStep(0);
+  toast('Table reserved — see you soon!');
+  go('home');
+});
+
+/* ========================================================================
+   RENDER: GALLERY PAGE + LIGHTBOX
+   ===================================================================== */
+const GALLERY_CATS = ['All','Food','Interior'];
+let galleryFilter = 'All', galleryIndex = 0, galleryFiltered = [];
+
+function renderGalleryFilters(){
+  $('#galleryFilters').innerHTML = GALLERY_CATS.map(c => `
+    <button data-gcat="${c}" class="badge px-4 py-2 rounded-full border transition-colors ${c===galleryFilter ? 'bg-gold text-[#1A1409] border-gold' : 'border-line text-muted hover:border-gold/50'}">${c}</button>`).join('');
+  $$('[data-gcat]').forEach(b => b.onclick = () => { galleryFilter = b.dataset.gcat; renderGalleryFilters(); renderGalleryGrid(); });
+}
+function renderGalleryGrid(){
+  galleryFiltered = GALLERY_ITEMS.filter(g => galleryFilter==='All' || g.cat===galleryFilter);
+  $('#galleryGrid').innerHTML = galleryFiltered.map((g,i) => `
+    <div data-reveal data-tilt data-tilt-max="5" data-gidx="${i}" class="relative rounded-2xl overflow-hidden cursor-pointer group ${g.tall ? 'row-span-2' : ''} lift">
+      <img src="${g.img}" alt="${g.title}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent group-hover:from-black/75 transition-colors flex items-end p-4 opacity-0 group-hover:opacity-100">
+        <div>
+          <p class="badge gold-text">${g.cat}</p>
+          <p class="font-display">${g.title}</p>
+        </div>
+      </div>
+    </div>`).join('');
+  $$('[data-gidx]').forEach(el => el.onclick = () => openLightbox(+el.dataset.gidx));
+  refreshReveal();
+  initTilt();
+}
+function openLightbox(idx){ galleryIndex = idx; renderLightbox(); $('#lightbox').classList.remove('hidden'); }
+function renderLightbox(){
+  const g = galleryFiltered[galleryIndex];
+  $('#lightboxBody').innerHTML = `
+    <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-4"><img src="${g.img.replace('w=900','w=1600')}" alt="${g.title}" class="w-full h-full object-cover"></div>
+    <p class="badge gold-text text-center">${g.cat}</p>
+    <p class="font-display text-2xl text-center mt-1">${g.title}</p>`;
+}
+$('#lightboxClose').addEventListener('click', () => $('#lightbox').classList.add('hidden'));
+$('#lightboxPrev').addEventListener('click', () => { galleryIndex = (galleryIndex-1+galleryFiltered.length)%galleryFiltered.length; renderLightbox(); });
+$('#lightboxNext').addEventListener('click', () => { galleryIndex = (galleryIndex+1)%galleryFiltered.length; renderLightbox(); });
+document.addEventListener('keydown', e => {
+  if ($('#lightbox').classList.contains('hidden')) return;
+  if (e.key==='Escape') $('#lightbox').classList.add('hidden');
+  if (e.key==='ArrowLeft') $('#lightboxPrev').click();
+  if (e.key==='ArrowRight') $('#lightboxNext').click();
+});
+
+/* ========================================================================
+   RENDER: ABOUT PAGE
+   ===================================================================== */
+function renderTimeline(){
+  $('#timelineList').innerHTML = TIMELINE.map(t => `
+    <div data-reveal class="flex gap-5">
+      <div class="font-display text-2xl gold-text w-16 shrink-0">${t.year}</div>
+      <div class="border-l border-line pl-5 pb-1">
+        <p class="text-muted leading-relaxed">${t.text}</p>
+      </div>
+    </div>`).join('');
+  refreshReveal();
+}
+function renderAwards(){
+  $('#awardsList').innerHTML = AWARDS.map(a => `<span class="badge hairline rounded-full px-4 py-2.5">${a}</span>`).join('');
+}
+
+/* ========================================================================
+   CONTACT PAGE
+   ===================================================================== */
+$('#contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  $('#contactMsg').classList.remove('hidden');
+  e.target.reset();
+});
+
+/* ========================================================================
+   RENDER: ADMIN DASHBOARD (demo)
+   ===================================================================== */
+function renderAdminStats(){
+  $('#adminStats').innerHTML = ADMIN_STATS.map(s => `
+    <div data-reveal class="glass rounded-2xl p-5">
+      <p class="eyebrow !text-[.62rem] mb-3">${s.label}</p>
+      <p class="font-mono text-2xl mb-1">${s.value}</p>
+      <p class="text-xs font-mono ${s.up ? 'text-emerald-400' : 'text-rose-400'}">${s.up?'↑':'↓'} ${s.delta}</p>
+    </div>`).join('');
+}
+function renderPopularDishes(){
+  $('#popularDishes').innerHTML = POPULAR_DISHES.map(p => `
+    <div>
+      <div class="flex justify-between text-xs font-mono mb-1.5"><span>${p.name}</span><span class="gold-text">${p.pct}%</span></div>
+      <div class="h-1.5 rounded-full bg-line overflow-hidden"><div class="h-full bg-gradient-to-r from-golddeep to-gold rounded-full" style="width:${p.pct}%"></div></div>
+    </div>`).join('');
+}
+function renderOrdersTable(){
+  const statusColor = s => s==='Delivered' ? 'text-emerald-400' : s==='Cancelled' ? 'text-rose-400' : 'text-goldlite';
+  $('#ordersTable').innerHTML = `
+    <thead class="text-muted text-left">
+      <tr><th class="pb-3 pr-4 font-normal">Order</th><th class="pb-3 pr-4 font-normal">Customer</th><th class="pb-3 pr-4 font-normal">Items</th><th class="pb-3 pr-4 font-normal">Total</th><th class="pb-3 font-normal">Status</th></tr>
+    </thead>
+    <tbody>
+      ${RECENT_ORDERS.map(o => `
+        <tr class="border-t border-line/60">
+          <td class="py-2.5 pr-4 whitespace-nowrap">${o.id}</td>
+          <td class="py-2.5 pr-4 whitespace-nowrap">${o.customer}</td>
+          <td class="py-2.5 pr-4 text-muted whitespace-nowrap">${o.items}</td>
+          <td class="py-2.5 pr-4 whitespace-nowrap">${naira(o.total)}</td>
+          <td class="py-2.5 whitespace-nowrap ${statusColor(o.status)}">${o.status}</td>
+        </tr>`).join('')}
+    </tbody>`;
+}
+function renderDeliveryTracking(){
+  $('#deliveryTracking').innerHTML = DELIVERY_TRACKING.map(d => `
+    <div class="glass rounded-xl p-4">
+      <div class="flex justify-between text-xs font-mono mb-3"><span>${d.id}</span><span class="text-muted">${d.customer}</span></div>
+      <div class="flex items-center gap-1.5 mb-2">
+        ${STAGES.map((s,i) => `<div class="flex-1 h-1 rounded-full ${i<=d.stage ? 'bg-gold' : 'bg-line'}"></div>`).join('')}
+      </div>
+      <p class="text-xs gold-text">${STAGES[d.stage]}</p>
+    </div>`).join('');
+}
+function drawRevenueChart(){
+  const svg = $('#revenueChart');
+  const w = 560, h = 200, pad = 12;
+  const max = Math.max(...REVENUE_SERIES), min = Math.min(...REVENUE_SERIES);
+  const stepX = (w - pad*2) / (REVENUE_SERIES.length - 1);
+  const pts = REVENUE_SERIES.map((v,i) => [ pad + i*stepX, h - pad - ((v-min)/(max-min)) * (h-pad*2) ]);
+  const line = pts.map(p => p.join(',')).join(' ');
+  const area = `${pad},${h-pad} ${line} ${w-pad},${h-pad}`;
+  svg.innerHTML = `
+    <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A961" stop-opacity="0.35"/><stop offset="100%" stop-color="#C9A961" stop-opacity="0"/>
+    </linearGradient></defs>
+    <polygon points="${area}" fill="url(#revGrad)"/>
+    <polyline points="${line}" fill="none" stroke="#C9A961" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#0A0908" stroke="#E8C872" stroke-width="1.5"/>`).join('')}`;
+}
+function drawPeakChart(){
+  const max = Math.max(...PEAK_HOURS.map(p => p.v));
+  $('#peakChart').innerHTML = PEAK_HOURS.map(p => `
+    <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end">
+      <div class="w-full rounded-t-md bg-gradient-to-t from-golddeep to-gold transition-all duration-700" style="height:${(p.v/max*100)}%"></div>
+      <span class="font-mono text-[10px] text-muted">${p.h}</span>
+    </div>`).join('');
+}
+function drawDonut(){
+  const returning = 68;
+  const deg = returning/100*360;
+  $('#customerDonut').innerHTML = `
+    <div class="w-28 h-28 rounded-full relative" style="background:conic-gradient(#C9A961 0deg ${deg}deg, #5E1A24 ${deg}deg 360deg);">
+      <div class="absolute inset-2 rounded-full bg-ink flex items-center justify-center font-mono text-sm">${returning}%</div>
+    </div>`;
+}
+function drawAdminCharts(){ drawRevenueChart(); drawPeakChart(); drawDonut(); }
+
+/* ========================================================================
+   AI FOOD RECOMMENDATION ASSISTANT (floating, simulated — no external calls)
+   ===================================================================== */
+let assistantState = { step:'start', craving:null, cuisine:null };
+
+function assistantBubble(text){
+  return `<div class="p-4 pb-2"><p class="badge gold-text mb-2">✦ Food Assistant</p><p class="text-sm leading-relaxed">${text}</p></div>`;
+}
+function optionRow(opts, key){
+  return `<div class="px-4 pb-4 flex flex-wrap gap-2">${opts.map(o => `<button data-aopt="${key}:${o}" class="chip px-3.5 py-2 rounded-full text-xs">${o}</button>`).join('')}</div>`;
+}
+function getRecommendations(){
+  let pool = (CRAVING_MAP[assistantState.craving] || DISHES.map(d=>d.id)).map(byId);
+  if (assistantState.cuisine && assistantState.cuisine !== 'Either'){
+    const wantLocal = assistantState.cuisine === 'Local';
+    const filtered = pool.filter(d => wantLocal ? d.cat !== 'Continental Cuisine' : ['Continental Cuisine','Desserts','Drinks'].includes(d.cat));
+    if (filtered.length) pool = filtered;
+  }
+  return pool.slice(0,2);
+}
+function renderAssistant(){
+  const panel = $('#assistantPanel');
+  if (assistantState.step === 'start'){
+    panel.innerHTML = assistantBubble("Hi, I'm your Lumière food guide 👋 What are you craving tonight?") + optionRow(['Spicy','Savory','Light','Sweet'], 'craving');
+  } else if (assistantState.step === 'cuisine'){
+    panel.innerHTML = assistantBubble(`Something ${assistantState.craving.toLowerCase()} — got it. Local Nigerian flavour, continental, or either?`) + optionRow(['Local','Continental','Either'], 'cuisine');
+  } else {
+    const recs = getRecommendations();
+    panel.innerHTML = assistantBubble("Here's what I'd send to your table:") +
+      recs.map(d => `
+        <div class="px-4 pb-3">
+          <div class="glass rounded-xl p-3 flex items-center gap-3">
+            <div class="w-12 h-12 rounded-lg bg-gradient-to-br ${d.grad} flex items-center justify-center text-lg shrink-0">${d.icon}</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-display truncate">${d.name}</p>
+              <p class="text-xs gold-text font-mono">${naira(d.price)}</p>
+            </div>
+            <button data-add="${d.id}" class="badge px-2.5 py-1.5 rounded-full border border-gold-line hover:bg-gold/10 shrink-0">Add</button>
+          </div>
+        </div>`).join('') +
+      `<div class="px-4 pb-4"><button id="assistantRestart" class="w-full btn-ghost rounded-full py-2 text-xs font-display">Ask again</button></div>`;
+    bindAddButtons();
+    $('#assistantRestart').onclick = () => { assistantState = { step:'start', craving:null, cuisine:null }; renderAssistant(); };
+  }
+}
+$('#assistantPanel').addEventListener('click', e => {
+  const opt = e.target.closest('[data-aopt]');
+  if (!opt) return;
+  const [key, val] = opt.dataset.aopt.split(':');
+  if (key === 'craving'){ assistantState.craving = val; assistantState.step = 'cuisine'; }
+  else if (key === 'cuisine'){ assistantState.cuisine = val; assistantState.step = 'results'; }
+  renderAssistant();
+});
+$('#assistantToggle').addEventListener('click', () => {
+  $('#assistantPanel').classList.toggle('hidden');
+  $('#assistantPing').style.display = 'none';
+});
+
+/* ========================================================================
+   INIT — runs once, after every page section + module above has loaded
+   ===================================================================== */
+function init(){
+  // Home
+  renderFeatured();
+  renderWhy();
+  renderTestimonial();
+  restartTestimonialTimer();
+  renderStats();
+  renderInsta();
+
+  // Nav
+  buildRail();
+  updateRail();
+
+  // Menu
+  renderMenuFilters();
+  renderMenuGrid();
+
+  // Order
+  $$('[data-fulfill]').forEach(x => x.classList.toggle('active', x.dataset.fulfill === 'delivery'));
+  renderOrderPage();
+
+  // Reservation
+  const today = new Date().toISOString().split('T')[0];
+  $('#resDate').min = today;
+  setResStep(0);
+
+  // Gallery
+  renderGalleryFilters();
+  renderGalleryGrid();
+
+  // About
+  renderTimeline();
+  renderAwards();
+  initTilt(); // binds static tilt elements too (hero CTA, About banner)
+
+  // Admin dashboard
+  renderAdminStats();
+  renderPopularDishes();
+  renderOrdersTable();
+  renderDeliveryTracking();
+
+  // AI assistant (pre-rendered, panel stays hidden until toggled)
+  renderAssistant();
+
+  // Observers
+  refreshReveal();
+  observeCounters();
+}
+init();
+</script>
+</body>
+</html>
